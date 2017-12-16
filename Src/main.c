@@ -67,11 +67,15 @@ static void MX_ADC1_Init(void);
 /* USER CODE BEGIN 0 */
 void adc(){
 	uint32_t readvalue;
-	int32_t c,p;
+	//int32_t c,p;
 	char out[7];
 	readvalue = HAL_ADC_GetValue(&hadc1);
 	sprintf(out,"%d\n\r",readvalue);
 	HAL_UART_Transmit(&huart2,out,7,100);
+	/*char x='A';
+	if(HAL_UART_Transmit(&huart2,&x,1,100)==HAL_OK){
+		HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_14);
+	}*/
 }
 /* USER CODE END 0 */
 
@@ -119,14 +123,18 @@ int main(void)
 		  HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_14);
 		  HAL_Delay(100);
 	  }*/
-	  if(HAL_UART_Receive(&huart2,&a,1,100)==HAL_OK){
+	  /*if(HAL_UART_Receive(&huart2,&a,1,100)==HAL_OK){
 		  HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_14);
 		  if(a=='a'){
 			  HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_15);
 		  }
 		  HAL_UART_Transmit(&huart2,b,10,100);
-	  }
-	  //HAL_ADC_Start_IT(&hadc1);
+	  }*/
+	  /*if(HAL_UART_Receive(&huart2,&a,1,100)==HAL_OK){
+		  HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_14);
+		  HAL_UART_Transmit(&huart2,&a,1,100);
+	  }*/
+	  HAL_ADC_Start_IT(&hadc1);
   }
   /* USER CODE END 3 */
 
